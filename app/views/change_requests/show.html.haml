@@ -1,0 +1,11 @@
+%h2 Change Request Details
+
+%p
+  %strong Content:
+  = @change_request.content
+
+%p
+  %strong Status:
+  = @change_request.status
+
+= link_to 'Back to List', change_requests_path, class: 'btn btn-secondary'

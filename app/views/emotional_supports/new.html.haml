@@ -1,0 +1,12 @@
+-# app/views/emotional_supports/new.html.haml
+.container
+  %h2 Request Emotional Support
+
+  = simple_form_for @emotional_support do |f|
+    = f.error_notification
+
+    .form-inputs
+      = f.input :content, as: :text, required: true, label: 'Your Support Request', input_html: { rows: 4 }
+
+    .form-actions
+      = f.button :submit, 'Submit Request', class: 'btn btn-primary'

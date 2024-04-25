@@ -1,0 +1,14 @@
+-# app/views/answer_alerts/new.html.haml
+.container
+  %h2 Answer Alert 
+= simple_form_for @answer_alert do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :commit, as: :text, required: true, label: 'Your alert', input_html: { rows: 4 }
+    = f.input :answer_id, as: :hidden, input_html: { value: @answer_alert.answer_id }
+
+  .form-actions
+    = f.button :submit, 'Submit Alert', class: 'btn btn-primary'
+    = link_to 'Cancel', answers_path, class: 'btn btn-secondary'
+

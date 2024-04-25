@@ -1,0 +1,10 @@
+-# frozen_string_literal: true
+= simple_form_for(@question) do |f|
+  .card-body
+    = f.input :content, label: "Question", required: true, input_html: { maxlength: 255 }
+    = f.input :sensitivity, as: :boolean, label: "Sensitive"
+    = f.association :ques_category, collection: @ques_categories.where(active: true), input_html: { class: 'mb-3 ques-category-field' }, label: "Question Category", required: true
+  .card-footer.d-flex
+    %button.btn.btn-primary{ type: 'submit' }
+      Save
+    = link_to 'Back', questions_path, class: 'btn btn-link ms-auto'

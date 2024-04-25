@@ -1,0 +1,6 @@
+= simple_form_for([bubble]) do |f|
+  = f.input :name, label: 'Bubble Name'
+  = f.input :holder_id, as: :hidden
+
+  %br/
+  = f.button :submit, class: 'btn btn-primary'

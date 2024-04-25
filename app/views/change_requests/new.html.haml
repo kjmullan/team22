@@ -1,0 +1,14 @@
+%h2 Change Requests
+
+-# Create a new change request
+.container
+  %h3 Submit a New Change Request
+
+  = simple_form_for [@question, @change_request] do |f|
+    = f.error_notification
+
+    .form-inputs
+      = f.input :content, as: :text, required: true, label: 'Describe your change request:', input_html: { rows: 4 }
+
+    .form-actions
+      = f.button :submit, 'Submit Request', class: 'btn btn-primary'

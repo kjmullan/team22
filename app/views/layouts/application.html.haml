@@ -1,0 +1,129 @@
+!!!
+%html{ lang: 'en-GB' }
+  %head
+    %title DigniSpace
+
+    %meta{ :'http-equiv' => "content-type", content: "text/html; charset=utf-8" }
+    %meta{ :'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0, shrink-to-fit=no" }
+
+    - if content_for(:description)
+      %meta{ content: content_for(:description), name: 'description' }
+
+    %title= ["Project", content_for(:title)].compact.join(' - ')
+
+    - # Meta tags included for security
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    - # Links to webpacker pack tag specifying packs styles for css, application for javascript
+    = stylesheet_pack_tag 'styles', media: 'all'
+    = javascript_pack_tag 'application'
+
+  %body
+    %header.navbar.navbar-expand-lg.bg-light.mb-3
+      / Responsive nabbar 
+      .container-fluid
+        = link_to '#', class: 'navbar-brand' do
+          - #= image_pack_tag 'images/logo.png', height: 40
+          DigniSpace
+        %button.navbar-toggler{ type: :button, data: { bs_toggle: :collapse, bs_target: '#navbar-content' }, aria: { controls: 'navbar-content', expanded: 'false', label: 'Toggle navigation' } }
+          %span.navbar-toggler-icon
+        #navbar-content.navbar-collapse.collapse
+          %nav.navbar-nav
+            - if current_user && current_user.role == 'admin'
+              
+              .nav-item
+                = link_to users_path, class: 'active nav-link' do
+                  %i.bi-house
+                  Home
+              .nav-item
+                = link_to answers_path, class: 'active nav-link' do
+                  %i.bi-globe
+                  View All answers  
+              .nav-item
+                = link_to future_messages_path, class: 'active nav-link' do
+                  %i.bi-envelope
+                  View All Future message
+              .nav-item
+                = link_to ques_categories_path, class: 'active nav-link' do
+                  %i.bi-tag
+                  Catergories  
+              .nav-item
+                = link_to questions_path, class: 'active nav-link' do
+                  %i.bi-patch-question
+                  Question 
+              .nav-item
+                = link_to change_requests_path, class: 'active nav-link' do
+                  %i.bi-patch-question
+                  Change Requests 
+            - if current_user && current_user.role == 'supporter'
+              .nav-item
+                = link_to young_person_managements_path, class: 'active nav-link' do
+                  %i.bi-house
+                  Home
+              .nav-item
+                = link_to questions_path, class: 'active nav-link' do
+                  %i.bi-house
+                  Questions
+              .nav-item
+                = link_to emotional_supports_path, class: 'active nav-link' do
+                  %i.bi-house
+                  Emotional Support Requests
+            - if current_user && current_user.role == 'loved_one'
+              .nav-item
+                = link_to answers_path, class: 'active nav-link' do
+                  %i.bi-house
+                  Home
+            - if current_user && current_user.role == 'young_person'
+              .nav-item
+                = link_to questions_path, class: 'active nav-link' do
+                  %i.bi-house
+                  Home
+              .nav-item
+                = link_to future_messages_path, class: 'active nav-link' do
+                  %i.bi-envelope
+                  Future message
+              .nav-item
+                = link_to bubbles_path, class: 'active nav-link' do
+                  %i.bi-envelope
+                  Bubbles
+            - if user_signed_in?
+              .nav-item
+                .navbar-text= current_user.email
+                %nav
+                  = link_to 'Edit Profile', edit_user_path(current_user), class: 'nav-link'
+          - if current_user
+            %nav.navbar-nav
+              .nav-item
+                %li= link_to "Log out", logout_path, method: :delete, class: 'btn btn-outline-primary ms-1 btn-sm'
+
+    - if flash.present?
+      .container-fluid.flash-messages
+        - flash.each do |message_type, message|
+          - next unless message_type == 'alert' || message_type == 'notice'
+          .alert{ class: "alert-#{ message_type == 'notice' ? 'success' : 'danger' }" }= message
+
+    %main
+      .container-fluid
+        = yield
+
+    %footer
+      .container-fluid
+        .d-flex.p-3
+          = link_to about_path, class: 'nav-link mx-3' do
+            %i.bi-info-circle
+            About Us
+          = link_to privacy_path, class: 'nav-link mx-3' do
+            %i.bi-shield-exclamation
+            Privacy
+          = link_to cookies_path, class: 'nav-link mx-3' do
+            %i.bi-cookie
+            Cookies
+          = link_to contacts_path, class: 'nav-link mx-3' do
+            %i.bi-person-lines-fill{ style: "font-size: 1rem; color: cornflowerblue" }
+            Contact
+            
+- if current_user && current_user.role == 'young_person'
+  = link_to new_emotional_support_path, class: 'floating-button', data: { toggle: "modal", target: "#requestSupportModal" } do
+    Need Help?

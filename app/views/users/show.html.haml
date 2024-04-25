@@ -1,0 +1,51 @@
+%h1 User Details
+
+%ul.list-group
+  %li.list-group-item
+    %strong Name:
+    = @user.name
+  %li.list-group-item
+    %strong Email:
+    = @user.email
+  %li.list-group-item
+    %strong Pronouns:
+    = @user.Pronouns
+  %li.list-group-item
+    %strong Role:
+    = @user.role
+
+- if @user.role == 'young_person'
+  %h2.mt-4 Current Supporter Details
+  - if @current_supporters.any?
+    %ul.list-group
+      - @current_supporters.each do |supporter, management|
+        %li.list-group-item
+          %strong Name:
+          = supporter.user.name
+        %li.list-group-item
+          %strong Email:
+          = supporter.user.email
+        %li.list-group-item
+          %strong Commit:
+          = management.commit
+  - else
+    %p No current supporter assigned now
+
+  %h2.mt-4 Previous Supporter Details
+  - if @previous_supporters.any?
+    %ul.list-group
+      - @previous_supporters.each do |supporter, management|
+        %li.list-group-item
+          %strong Name:
+          = supporter.user.name
+        %li.list-group-item
+          %strong Email:
+          = supporter.user.email
+        %li.list-group-item
+          %strong Commit:
+          = management.commit
+        %li.list-group-item
+          %strong Date Ended:
+          = management.updated_at.strftime("%Y-%m-%d")
+  - else
+    %p No previous supporter assigned before

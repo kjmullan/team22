@@ -1,0 +1,24 @@
+<h1>Members</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td><%= member.email %></td>
+        <td>
+          <%= link_to 'Show', [:api, :v1, member] %>
+          <%= link_to 'Edit', edit_api_v1_member_path(member) %>
+          <%= link_to 'Destroy', api_v1_member_path(member), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Member', new_api_v1_member_path %>

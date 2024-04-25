@@ -1,0 +1,19 @@
+.card
+  .card-header.d-flex.align-items-center
+    %span Young People Alerts
+
+  %table.table
+    %thead
+      %tr
+        %th Young Person Name
+        %th Answer 
+        %th Actions
+    %tbody
+      - @answer_alerts.each do |alert|
+        %tr
+          %td= alert.answer_id.content
+          %td= alert.answer_id
+          %td
+            = link_to 'Show', answer_alert_path(alert), class: 'btn btn-info'
+            = link_to 'Edit', edit_answer_alert_path(alert), class: 'btn btn-warning'
+            = link_to 'Delete', answer_alert_path(alert), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

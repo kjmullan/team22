@@ -1,0 +1,15 @@
+%h1 Bubble: #{ @bubble.name }
+%p
+  %strong ID:
+  = @bubble.id
+%p
+  %strong Total Members:
+  = @bubble.members.count
+
+%h2 Members
+%ul
+  - @bubble.members.each do |member|
+    %li= member.name
+
+= link_to 'Edit', edit_bubble_path(@bubble)
+= link_to 'Back to List', bubbles_path

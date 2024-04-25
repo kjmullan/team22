@@ -1,0 +1,8 @@
+-# app/views/future_message_alerts/new.html.haml
+.container
+  %h2 Edit Alert
+= simple_form_for @future_message_alert do |f|
+  = f.error_notification
+  = f.input :commit, as: :text, required: true, label: 'Your alert', input_html: { rows: 4 }
+  = f.input :answer_id, as: :hidden, input_html: { value: @future_message_alert.answer_id }
+  = f.button :submit, 'Update Alert', class: 'btn btn-primary'

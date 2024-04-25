@@ -1,0 +1,32 @@
+.card
+  .card-header.d-flex.align-items-center
+    %span Listing Future Messages
+    - if current_user.young_person?
+      = link_to 'New Future message', new_future_message_path, class: 'btn btn-outline-secondary ms-auto'
+
+  %table.table
+    %thead
+      %tr
+        %th Future messages
+        %th Time to publish
+        %th Bubbles shared 
+        %th
+    %tbody
+      - @future_messages.each do |future_message|
+        %tr
+          %td= future_message.content
+          %td= future_message.published_at
+          %td= future_message.young_person.user.name
+          %td
+            .btn-toolbar
+              = link_to 'Show', future_message_path(future_message), class: 'btn btn-outline-secondary btn-sm'
+              - if current_user && current_user.role == 'admin'
+                - if future_message.has_active_alert?
+                  = link_to 'Edit Alert', edit_future_message_alert_path(future_message.future_message_alerts.where(active: true).first), class: 'btn btn-outline-secondary ms-1 btn-sm'
+                - else
+                  = link_to 'Create Alert', new_future_message_alert_path(future_message_id: future_message.id), class: 'btn btn-outline-secondary ms-1 btn-sm'
+                - if future_message.publishable == false
+                  = link_to 'Publish', publish_future_message_path(future_message), method: :patch, class: 'btn btn-outline-secondary ms-1 btn-sm', data: { confirm: 'Are you sure you want to publish this message?' }
+              - if current_user.role == 'young_person'
+                = link_to 'Edit', edit_future_message_path(future_message), class: 'btn btn-outline-secondary ms-1 btn-sm'
+                = link_to 'Destroy', future_message_path(future_message), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger ms-1 btn-sm'

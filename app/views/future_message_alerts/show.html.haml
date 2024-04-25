@@ -1,0 +1,18 @@
+%h1 Alert Details
+%p
+  %strong Alert Message:
+  = @future_message_alert.commit
+%p
+  %strong Related future_message ID:
+  = @future_message_alert.future_message_id
+%p
+  %strong Created At:
+  = @future_message_alert.created_at.strftime("%Y-%m-%d %H:%M:%S")
+%p
+  %strong Updated At:
+  = @future_message_alert.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+  
+= link_to 'Edit', edit_future_message_alert_path(@future_message_alert), class: 'btn btn-primary'
+= link_to 'Back to future_message', future_messages_path, class: 'btn btn-secondary'
+
+

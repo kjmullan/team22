@@ -1,0 +1,27 @@
+.card
+  .card-header.d-flex.align-items-center
+    %span Listing Young People Associated with Supporter
+
+  %table.table
+    %thead
+      %tr
+        %th Young Person Name
+        %th Young Person Email
+        %th Total Answers
+        %th Passed Away?
+        %th Actions
+    %tbody
+      - @young_people.each do |young_person|
+        %tr
+          %td= young_person.user.name
+          %td= young_person.user.email
+          %td= young_person.answers.count
+          %td= young_person.passed_away
+          %td
+            .btn-toolbar.float-end
+              = link_to 'View Answers', answers_path(user_id: young_person.user_id), class: 'btn btn-outline-primary btn-sm'
+              = link_to 'View Future Messages', future_messages_path(user_id: young_person.user_id), class: 'btn btn-outline-primary btn-sm'
+              - if young_person.passed_away == false
+                = link_to 'Mark as Passed Away', passed_away_young_person_management_path(user_id: young_person.user_id), method: :patch, class: 'btn btn-danger', data: { confirm: 'Are you sure? This action cannot be undone.' }
+
+

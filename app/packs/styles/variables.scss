@@ -1,0 +1,40 @@
+@import "~bootstrap/scss/functions";
+$body-bg: PapayaWhip;
+$header-bg: Blue;
+$bd-violet: purple;
+
+.btn-bd-primary {
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet);
+    --bs-btn-border-color: var(--bd-violet);
+    --bs-btn-border-radius: .5rem;
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+    --bs-btn-hover-border-color: #{shade-color($bd-violet, 10%)};
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+    --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+  }
+
+  .floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #800080; /* Change background color to purple */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out; /* Add transition for smooth fade effect */
+    opacity: 0.5; /* Set initial opacity */
+  }
+  
+  .floating-button:hover {
+    opacity: 1; /* Change opacity to 1 on hover for fade effect */
+  }
+
+@import "~bootstrap/scss/variables";

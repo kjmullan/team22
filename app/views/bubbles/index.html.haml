@@ -1,0 +1,19 @@
+
+.card
+  .card-header.d-flex.align-items-center
+    %span Listing Bubbles
+    = link_to 'New Bubble', new_bubble_path, class: 'btn btn-outline-secondary ms-auto'
+
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Total member
+    %tbody
+      - @bubbles.each do |bubble|
+        %tr
+          %td= bubble.name
+          %td= bubble.members.count
+          %td
+            = link_to 'Edit', bubble_path(bubble)
+            = link_to 'Delete', bubble_path(bubble), method: :delete, data: { confirm: 'Are you sure?' }

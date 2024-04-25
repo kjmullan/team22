@@ -1,0 +1,23 @@
+.row.justify-content-center
+  .col-sm-8.col-lg-6
+    .card
+      .card-header
+        Future Message details
+      .card-body
+        %dl.row.mb-0
+          %dt.col-md-3 Id:
+          %dd.col-md-9= @future_message.id
+          %dt.col-md-3 Content:
+          %dd.col-md-9= @future_message.content
+          %dt.col-md-3 Published at:
+          %dd.col-md-9= @future_message.published_at
+          %dt.col-md-3 User:
+          %dd.col-md-9= @future_message.young_person.user.name
+      .card-footer.d-flex
+        - if current_user && current_user.role == 'young_person' 
+          = link_to 'Edit', edit_future_message_path(@future_message), class: 'btn btn-primary'
+          = link_to 'Back', future_messages_path, class: 'btn btn-link ms-auto'
+        - if current_user && current_user.role == 'supporter'
+          = link_to 'Back', future_messages_path(user_id: @future_message.user_id), class: 'btn btn-link ms-auto'
+        - if current_user && current_user.role == 'admin' 
+          = link_to 'Back',future_message_path, class: 'btn btn-link ms-auto'

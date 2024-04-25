@@ -1,0 +1,15 @@
+%h1 New Management Record
+%h2 Assign supporter for #{@young_person&.user&.name}
+= form_for @young_person_management, url: young_person_managements_path, html: { class: "form" } do |f|
+  .form-group
+    = f.label :supporter_id, "Select Supporter"
+    = f.collection_select :supporter_id, @supporters, :user_id, proc { |supporter| supporter.user&.name }, { include_blank: true }, { class: "form-control" }
+    = f.hidden_field :young_person_id, value: @young_person&.user_id
+
+
+  .form-group
+    = f.label :commit, "Commit"
+    = f.text_area :commit, class: "form-control", rows: 5
+
+  .actions
+    = f.submit "Create", class: "btn btn-primary"

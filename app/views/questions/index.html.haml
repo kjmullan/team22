@@ -1,0 +1,45 @@
+.card
+  .card-header.d-flex.align-items-center
+    %span Listing Questions
+    - if current_user && current_user.role == 'admin'
+      = link_to 'New Question', new_question_path, class: 'btn btn-outline-secondary ms-auto'
+
+  %table.table
+    %thead
+      %tr
+        %th Question
+        - if current_user && current_user.role != 'young_person'
+          %th Sensitivity
+        - if current_user && current_user.role == 'admin'
+          %th Active
+    %tbody
+      - if current_user && current_user.role == 'young_person'
+        - @questions.where(sensitivity: false).each do |question|
+          %tr
+            %td= question.content
+            %td
+              .btn-toolbar.float-end
+                - if question.answers.any?
+                  = link_to 'Show', question, class: 'btn btn-outline-secondary btn-sm'
+                  = link_to 'Edit Answer', edit_question_answer_path(question, question.answers.first), class: 'btn btn-outline-primary ms-1 btn-sm'
+                - else
+                  = link_to 'Show', question, class: 'btn btn-outline-secondary btn-sm'
+                  - if current_user && current_user.role == 'young_person'
+                    = link_to 'Answer', new_question_answer_path(question), class: 'btn btn-outline-primary ms-1 btn-sm'
+      - else
+        - @questions.each do |question|
+          %tr
+            %td= question.content
+            %td= question.sensitivity
+            - if current_user && current_user.role == 'admin'
+              %td= question.active
+            %td
+              .btn-toolbar.float-end
+                = link_to 'Show', question, class: 'btn btn-outline-secondary btn-sm'
+                - if current_user && current_user.role == 'admin'
+                  = link_to 'Edit', edit_question_path(question), class: 'btn btn-bd-primary'
+                  = link_to 'Deactivate', make_unactive_question_path(question), method: :patch, data: { confirm: 'Are you sure?' }
+                - else 
+                  = link_to 'Request Change', new_question_change_request_path(question), class: 'btn btn-bd-primary'
+
+
