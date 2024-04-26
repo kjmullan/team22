@@ -19,7 +19,6 @@
 #  fk_rails_...  (bubble_id => bubbles.id)
 #  fk_rails_...  (future_message_id => future_messages.id)
 #
-# app/models/future_messages_bubble.rb
 class FutureMessagesBubble < ApplicationRecord
     belongs_to :future_message, class_name: 'FutureMessage', foreign_key: 'future_message_id'
     belongs_to :bubble, class_name: 'Bubble', foreign_key: 'bubble_id'

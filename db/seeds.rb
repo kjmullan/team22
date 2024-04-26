@@ -191,9 +191,10 @@ u1 = User.create!(
   email: "patient1@test.com",
   password: "patient",
   password_confirmation: "patient",
-  Pronouns: "He/Him",
+  pronouns: "He/Him",
   status: 1,
-  role: :young_person
+  role: :young_person,
+  bypass_invite_validation: true
 )
 
 
@@ -203,9 +204,10 @@ u2 = User.create!(
   email: "patient2@test.com",
   password: "patient",
   password_confirmation: "patient",
-  Pronouns: "She/Her",
+  pronouns: "She/Her",
   status: 1,
-  role: :young_person
+  role: :young_person,
+  bypass_invite_validation: true
 )
 
 
@@ -214,9 +216,10 @@ u3 = User.create!(
   email: "supporter1@test.com",
   password: "supporter",
   password_confirmation: "supporter",
-  Pronouns: "She/Her",
+  pronouns: "She/Her",
   status: 4,
-  role: :supporter
+  role: :supporter,
+  bypass_invite_validation: true
 )
 
 u4 = User.create!(
@@ -224,9 +227,10 @@ u4 = User.create!(
   email: "friend1@test.com",
   password: "friend",
   password_confirmation: "friend",
-  Pronouns: "They/Them",
+  pronouns: "They/Them",
   status: 2,
-  role: :loved_one
+  role: :loved_one,
+  bypass_invite_validation: true
 )
 
 u5 = User.create!(
@@ -234,9 +238,10 @@ u5 = User.create!(
   email: "friend2@test.com",
   password: "friend",
   password_confirmation: "friend",
-  Pronouns: "They/Them",
+  pronouns: "They/Them",
   status: 2,
-  role: :loved_one
+  role: :loved_one,
+  bypass_invite_validation: true
 )
 
 u6 = User.create!(
@@ -244,9 +249,10 @@ u6 = User.create!(
   email: "friend3@test.com",
   password: "friend",
   password_confirmation: "friend",
-  Pronouns: "They/Them",
+  pronouns: "They/Them",
   status: 2,
-  role: :loved_one
+  role: :loved_one,
+  bypass_invite_validation: true
 )
 
 u7 = User.create!(
@@ -254,9 +260,10 @@ u7 = User.create!(
   email: "friend4@test.com",
   password: "friend",
   password_confirmation: "friend",
-  Pronouns: "They/Them",
+  pronouns: "They/Them",
   status: 2,
-  role: :loved_one
+  role: :loved_one,
+  bypass_invite_validation: true
 )
 
 u8 = User.create!(
@@ -264,9 +271,10 @@ u8 = User.create!(
   email: "friend5@test.com",
   password: "friend",
   password_confirmation: "friend",
-  Pronouns: "They/Them",
+  pronouns: "They/Them",
   status: 2,
-  role: :loved_one
+  role: :loved_one,
+  bypass_invite_validation: true
 )
 
 u9 = User.create!(
@@ -274,9 +282,10 @@ u9 = User.create!(
   email: "friend6@test.com",
   password: "friend",
   password_confirmation: "friend",
-  Pronouns: "They/Them",
+  pronouns: "They/Them",
   status: 2,
-  role: :loved_one
+  role: :loved_one,
+  bypass_invite_validation: true
 )
 
 u10 = User.create!(
@@ -284,9 +293,10 @@ u10 = User.create!(
   email: "friend7@test.com",
   password: "friend",
   password_confirmation: "friend",
-  Pronouns: "They/Them",
+  pronouns: "They/Them",
   status: 2,
-  role: :loved_one
+  role: :loved_one,
+  bypass_invite_validation: true
 )
 
 u11 = User.create!(
@@ -294,9 +304,10 @@ u11 = User.create!(
   email: "admin@admin.com",
   password: "admin1",
   password_confirmation: "admin1",
-  Pronouns: "admin/admin",
+  pronouns: "admin/admin",
   status: 2,
-  role: :admin
+  role: :admin,
+  bypass_invite_validation: true
 )
 
 p1 = YoungPerson.create!(user: u1, passed_away: false)

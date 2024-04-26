@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_25_191910) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_26_034903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -168,6 +168,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_25_191910) do
     t.index ["future_message_id"], name: "index_future_messages_bubbles_on_future_message_id"
   end
 
+  create_table "invites", force: :cascade do |t|
+    t.string "code"
+    t.string "email"
+    t.boolean "used"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "expiration_date"
+    t.string "role"
+    t.text "message"
+    t.uuid "user_id"
+    t.string "token"
+  end
+
   create_table "ques_categories", force: :cascade do |t|
     t.string "name"
     t.boolean "active"
@@ -206,7 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_25_191910) do
     t.string "name"
     t.string "email"
     t.string "password"
-    t.string "Pronouns"
+    t.string "pronouns"
     t.integer "status"
     t.integer "role"
     t.datetime "created_at", null: false
@@ -220,6 +233,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_25_191910) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "invite_code"
+    t.boolean "bypass_invite_validation"
     t.index ["id"], name: "index_users_on_id", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

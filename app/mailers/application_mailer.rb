@@ -8,4 +8,11 @@ class ApplicationMailer < ActionMailer::Base
       format.text
     end
   end
+
+  def send_invite_email(user, invitee_email, token, message)
+    @user = user
+    @message = message
+    @token = token
+    mail(to: invitee_email, subject: 'You are invited!')
+  end
 end

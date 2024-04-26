@@ -15,6 +15,9 @@ class ApplicationController < ActionController::Base
   # except where explicitly skipped in child controllers.
   before_action :authenticate_user!
 
+  # Configures the parameter sanitizer for Devise upon user sign-up and account update.
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   # Provides a helper method to access the current logged-in user across the application views.
   helper_method :current_user
   helper_method :logged_in?
@@ -38,6 +41,14 @@ class ApplicationController < ActionController::Base
     response.headers['Expires'] = '0'
   end
 
+  # Configures permitted parameter lists for Devise controller actions, particularly for sign-up and account updates.
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :pronouns, :email, :password, :password_confirmation, :invite_code])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :pronouns, :email, :password, :password_confirmation, :current_password])
+  end
+
   # Determines the path to redirect the user after successful sign-in based on their role.
   # This is used by the devise (or similar) authentication framework to handle post-login navigation.
   def after_sign_in_path_for(resource)
@@ -53,3 +64,4 @@ class ApplicationController < ActionController::Base
     end
   end
 end
+

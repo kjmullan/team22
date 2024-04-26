@@ -2,24 +2,26 @@
 #
 # Table name: users
 #
-#  id                     :uuid             not null, primary key
-#  Pronouns               :string
-#  current_sign_in_at     :datetime
-#  current_sign_in_ip     :string
-#  email                  :string
-#  encrypted_password     :string           default(""), not null
-#  last_sign_in_at        :datetime
-#  last_sign_in_ip        :string
-#  name                   :string
-#  password               :string
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  role                   :integer
-#  sign_in_count          :integer          default(0), not null
-#  status                 :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                       :uuid             not null, primary key
+#  bypass_invite_validation :boolean
+#  current_sign_in_at       :datetime
+#  current_sign_in_ip       :string
+#  email                    :string
+#  encrypted_password       :string           default(""), not null
+#  invite_code              :string
+#  last_sign_in_at          :datetime
+#  last_sign_in_ip          :string
+#  name                     :string
+#  password                 :string
+#  pronouns                 :string
+#  remember_created_at      :datetime
+#  reset_password_sent_at   :datetime
+#  reset_password_token     :string
+#  role                     :integer
+#  sign_in_count            :integer          default(0), not null
+#  status                   :integer
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
 #
 # Indexes
 #

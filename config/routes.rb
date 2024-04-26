@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   get '/newuser', to: 'static_pages#newuser'
 
-
+  resources :invites, only: [:new, :create]
+  
   resources :contacts, only: [:new, :create]
   get '/contacts', to: 'contacts#new'
   post '/your_endpoint', to: 'contacts#create'
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
     end
   end
   resources :future_message_alerts
-  
   
   resources :questions do
     resources :answers
@@ -83,6 +83,12 @@ Rails.application.routes.draw do
       resources :members, only: [:index, :show, :create, :update, :destroy]
     end
   end
+  
+  # Admin namespace for managing invites
+  namespace :admin do
+    resources :invites, only: [:index, :destroy]
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -91,3 +97,4 @@ Rails.application.routes.draw do
     # other Devise routes
   end
 end
+
