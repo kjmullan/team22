@@ -8,7 +8,6 @@
 #  current_sign_in_ip       :string
 #  email                    :string
 #  encrypted_password       :string           default(""), not null
-#  invite_code              :string
 #  last_sign_in_at          :datetime
 #  last_sign_in_ip          :string
 #  name                     :string
@@ -20,6 +19,7 @@
 #  role                     :integer
 #  sign_in_count            :integer          default(0), not null
 #  status                   :integer
+#  token                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #

@@ -8,7 +8,6 @@
 #  current_sign_in_ip       :string
 #  email                    :string
 #  encrypted_password       :string           default(""), not null
-#  invite_code              :string
 #  last_sign_in_at          :datetime
 #  last_sign_in_ip          :string
 #  name                     :string
@@ -20,6 +19,7 @@
 #  role                     :integer
 #  sign_in_count            :integer          default(0), not null
 #  status                   :integer
+#  token                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #
@@ -43,7 +43,7 @@ class User < ApplicationRecord
   validates :password, presence: true, if: :password_required?
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
-  validates :invite_code, presence: true, unless: :bypass_invite_validation, on: :create
+  validates :token, presence: true, unless: :bypass_invite_validation, on: :create
   validate :valid_invite_code, unless: :bypass_invite_validation, on: :create
 
   # Associations
@@ -75,9 +75,9 @@ class User < ApplicationRecord
   def valid_invite_code
     return if bypass_invite_validation
   
-    invite = Invite.find_by(token: invite_code)
+    invite = Invite.find_by(token: token)
     if invite.nil? || invite.expiration_date < Time.current || invite.used
-      errors.add(:invite_code, 'is invalid, expired, or has already been used')
+      errors.add(:token, 'is invalid, expired, or has already been used')
     end
   end
 end

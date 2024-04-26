@@ -22,8 +22,8 @@
     %br/
     = f.password_field :password_confirmation, autocomplete: "off"
   .field
-    = f.label :invite_code, "Invite Code"
+    = f.label :token, "Invite Code"
     %br/
-    = f.text_field :invite_code
+    = f.text_field :token
   .actions
     = f.submit "Sign up"
