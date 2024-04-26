@@ -70,6 +70,16 @@ class User < ApplicationRecord
     SecureRandom.hex(10)  # Generates a random token for the invite
   end
 
+  before_validation :assign_role_from_invite, on: :create
+
+  # Assign role based on the invite token if present
+  def assign_role_from_invite
+    if token.present?
+      invite = Invite.find_by(token: token)
+      self.role = invite.role if invite && invite.expiration_date > Time.current
+    end
+  end
+
   private
 
   def valid_invite_code
@@ -81,5 +91,6 @@ class User < ApplicationRecord
     end
   end
 end
+
 
 

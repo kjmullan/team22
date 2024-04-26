@@ -84,6 +84,23 @@ class UsersController < ApplicationController
   
 
   def create
+    @user = User.new(user_params)
+    
+    # Retrieve the invite based on the token provided at signup
+    invite = Invite.find_by(token: params[:user][:token])
+    
+    if invite && invite.expiration_date > Time.now && !invite.used
+      @user.role = invite.role # Assign the role from the invite
+      invite.update(used: true) # Mark the invite as used
+      if @user.save
+        redirect_to root_url, notice: "User was successfully created with role #{invite.role}."
+      else
+        render :new
+      end
+    else
+      @user.errors.add(:token, 'is invalid or has expired')
+      render :new, alert: "Invalid or expired token."
+    end
   end
 
   def destroy
@@ -95,19 +112,13 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    
-    
-    
-    
-    
-
     # Only allow a list of trusted parameters through.
     def future_message_params
       params.require(:user).permit(:id, :content, :published_at, :user_id)
     end
 
     def user_params
-      permitted_params = [:name, :email, :Pronouns, :status, :role]
+      permitted_params = [:name, :email, :pronouns, :status, :role, :token] # Added :token to the list to capture it during sign-up.
     
       if params[:user][:password].present? || params[:user][:password_confirmation].present?
         password = params[:user][:password].strip
@@ -119,7 +130,4 @@ class UsersController < ApplicationController
     
       params.require(:user).permit(permitted_params)
     end
-    
-
-
 end

@@ -17,7 +17,7 @@
 class Invite < ApplicationRecord
   belongs_to :user
   before_create :set_expiration_date
-  validates :role, inclusion: { in: ['admin', 'supporter', 'young_person', 'loved_one'] }, allow_blank: true
+  validates :role, presence: true, inclusion: { in: ['admin', 'supporter', 'young_person', 'loved_one'] }
   validates :message, length: { maximum: 500 }, allow_blank: true
   validates :token, uniqueness: true, presence: true
 
