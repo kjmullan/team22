@@ -75,9 +75,9 @@ class User < ApplicationRecord
   def valid_invite_code
     return if bypass_invite_validation
   
-    invite = Invite.find_by(code: invite_code, email: email)
-    if invite.nil? || invite.expiration_date < Time.current
-      errors.add(:invite_code, 'is invalid or has expired')
+    invite = Invite.find_by(token: invite_code)
+    if invite.nil? || invite.expiration_date < Time.current || invite.used
+      errors.add(:invite_code, 'is invalid, expired, or has already been used')
     end
   end
 end

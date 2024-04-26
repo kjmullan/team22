@@ -1,11 +1,10 @@
-# app/controllers/admin/invites_controller.rb
 module Admin
   class InvitesController < ApplicationController
     before_action :authenticate_user!
     before_action :ensure_admin
 
     def index
-      @invites = Invite.order(created_at: :desc).page(params[:page])
+      @invites = Invite.order(created_at: :desc)
     end
 
     def destroy

@@ -1,18 +1,25 @@
-%h1 Invites
-%table
-  %thead
-    %tr
-      %th Email
-      %th Code
-      %th Sent At
-      %th Used By
-      %th Actions
-  %tbody
-    - @invites.each do |invite|
+.card
+  .card-header.d-flex.align-items-center
+    %span Invites
+
+  %table.table
+    %thead
       %tr
-        %td= invite.email
-        %td= invite.code
-        %td= invite.created_at.strftime("%Y-%m-%d %H:%M")
-        %td= invite.user&.email
-        %td
-          = link_to 'Delete', admin_invite_path(invite), method: :delete, data: { confirm: 'Are you sure?' }
+        %th Email Recipient
+        %th Role
+        %th Invite Code
+        %th Sent At
+        %th Sent By
+        %th Actions
+
+    %tbody
+      - @invites.each do |invite|
+        %tr
+          %td= invite.email
+          %td= invite.role
+          %td= invite.token
+          %td= invite.created_at.strftime("%Y-%m-%d %H:%M")
+          %td= invite.user&.email
+          %td
+            .btn-toolbar.float-end
+            = link_to 'Delete', admin_invite_path(invite), method: :delete, data: { confirm: 'Are you sure?' }

@@ -33,5 +33,3 @@ class Invite < ApplicationRecord
     self.expiration_date ||= 5.days.from_now
   end
 end
-
-
